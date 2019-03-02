@@ -1,0 +1,59 @@
+<div class="container-fluid">
+  <div class="container">
+    <div class="row" style="margin-top: 10%">
+      <div class="connection col-lg-5 col-md-5 col-xs-10 col-sm-6 col-lg-offset-3 col-md-offset-4 col-xs-offset-1 col-sm-offset-3">
+        <div class="text-center row ">
+          <img src="../../../assets/img/avatars/lg.png" alt="avatar" width="50%" height="60%">
+        </div>
+        <div class="text-center row ">
+          <h1 style="color: #a89926">HAGGYO</h1>
+          <!--<h5 style="color: #a89926">Management des établissements Privées</h5>-->
+        </div>
+        <!--  <ion-list> -->
+        <div class="row col-md-10 col-lg-10 col-xs-10 col-sm-10 col-md-offset-1 col-lg-offset-1 col-xs-offset-1 col-sm-offset-1" style="margin-top: 10%">
+          <h5 class="text-center text-danger" *ngIf="error"><strong>Login/Mot de passe incorrect</strong></h5>
+          <div class="form-group row">
+            <div>
+              <mat-form-field class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                <mat-label>Login : </mat-label>
+                <input type="email" matInput [(ngModel)]="credentials.login">
+                <span class="pull-right"><i class="fa fa-user"></i></span>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div >
+              <mat-form-field class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                <mat-label>Mot de passe : </mat-label>
+                <input type="{{showPassword ? 'text' : 'password'}}" matInput [(ngModel)]="credentials.password" />
+                <span class="pull-right" style="border-left: none"><i (click)="showPassword = !showPassword" class="{{ !showPassword ? 'fa fa-eye' : 'fa fa-eye-slash'}}"></i></span>
+              </mat-form-field>
+            </div>
+          </div>
+
+
+          <div class="form-group row col-md-12 col-lg-12 col-sm-12 col-xs-12">
+            <div class="pull-left">
+              <mat-checkbox color="warn" [(ngModel)]="credentials.rememberMe">Session active</mat-checkbox>
+            </div>
+            <div class="pull-right" >
+              <a [routerLink]="'/forgot-password'"><u style="color: #a89926;">Mot de passe oublié ?</u></a>
+            </div>
+          </div>
+          <div class="form-group row col-md-12 col-lg-12 col-sm-12 col-xs-12">
+            <div class="pull-right">
+              <button class="btn connectionButton" mat-raised-button (click)="login()">connexion</button>
+            </div>
+            <div class="pull-right">
+              <mat-progress-spinner mode="indeterminate" strokeWidth="10" color="warn" diameter="30" *ngIf="progressbar"></mat-progress-spinner>
+            </div>
+          </div>
+          <div class="row text-center col-md-12 col-lg-12 col-sm-12 col-xs-12" style="margin-top: 10%">
+            <h5 style="color: #a89926;">Copyright©2019, by Mouhamed NDOYE</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
