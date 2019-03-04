@@ -1,0 +1,26 @@
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th>N°</th>
+    <th>Année scolaire</th>
+    <th>Etat</th>
+    <th class="text-center">Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let annee of anneeScolaires">
+    <td>{{anneeScolaires.indexOf(annee) + 1}}</td>
+    <td>{{annee.annee}}</td>
+    <td>{{annee.encours ? 'Année en cours' : 'non actif'}}</td>
+    <td class="text-center"><button [ngClass]="{'btn': true,
+    'btn-success': !annee.encours,
+    'btn-warning': annee.encours}" (click)="!annee.encours ? onActive(annee) : onDesactive(annee)">
+      {{!annee.encours ? 'Activer' : 'Désactiver'}}
+    </button>&nbsp;&nbsp;&nbsp;
+    <button class="btn btn-primary"><i class="fa fa-edit"></i>Modifier</button>
+      &nbsp;&nbsp;&nbsp;
+      <button class="btn btn-danger"><i class="fa fa-remove"></i>Supprimer</button>
+    </td>
+  </tr>
+  </tbody>
+</table>

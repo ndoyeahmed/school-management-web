@@ -7,6 +7,8 @@ import {LayoutModule} from './layout/layout.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AuthModule} from './auth/auth.module';
 import {CookieService} from 'ngx-cookie-service';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -18,6 +20,7 @@ import {CookieService} from 'ngx-cookie-service';
     AppRoutingModule,
     LayoutModule,
     AuthModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [CookieService],
   bootstrap: [AppComponent]
