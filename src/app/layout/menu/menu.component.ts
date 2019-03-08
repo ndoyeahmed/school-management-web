@@ -10,6 +10,12 @@ export class MenuComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    // @ts-ignore
+    $(document).ready(() => {
+      // @ts-ignore
+      const trees: any = $('[data-widget="tree"]');
+      trees.tree();
+    });
   }
 
 }

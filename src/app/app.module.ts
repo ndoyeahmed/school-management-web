@@ -9,6 +9,7 @@ import {AuthModule} from './auth/auth.module';
 import {CookieService} from 'ngx-cookie-service';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import {ToastrModule} from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { environment } from '../environments/environment';
     AppRoutingModule,
     LayoutModule,
     AuthModule,
+    ToastrModule.forRoot(),
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [CookieService],

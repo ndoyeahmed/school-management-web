@@ -1,9 +1,9 @@
-import {Injectable, SkipSelf} from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
+import {Injectable} from '@angular/core';
+import {ToastrService} from 'ngx-toastr';
 
 @Injectable()
 export class NotificationService {
-  constructor(@SkipSelf() private toastrService: ToastrService) {
+  constructor(private toastrService: ToastrService) {
   }
 
   public success(message: string, title?: string, config?: any): void {
