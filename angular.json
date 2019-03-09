@@ -29,7 +29,9 @@
             ],
             "styles": [
               "src/styles.scss",
-              "node_modules/ngx-toastr/toastr.css"
+              "./node_modules/ngx-toastr/toastr.css",
+              "./src/assets/css/AdminLTE.css",
+              "./src/assets/css/skins/_all-skins.min.css"
             ],
             "scripts": [
               "./node_modules/jquery/dist/jquery.min.js",
