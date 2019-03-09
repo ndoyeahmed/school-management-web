@@ -12,6 +12,10 @@ export class ConfigurationEcoleService {
     return this.http.post(this.api + '/add-cycle', data);
   }
 
+  deleteCycle(data: Cycle): Observable<any> {
+    return this.http.post(this.api + '/delete-cycle', data);
+  }
+
   all(): Observable<Cycle[]> {
     return this.http.get<Cycle[]>(this.api + '/list-cycle');
   }

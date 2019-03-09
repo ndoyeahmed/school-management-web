@@ -53,7 +53,7 @@ export class CycleComponent implements OnInit {
     if (confirm('Etes vous sûr de vouloir le supprimé ?')) {
       this.ngxService.startLoader('cycle');
       this.deleteCycle.archiver = true;
-      this.configEcole.saveCycle(this.deleteCycle).subscribe(x => {
+      this.configEcole.deleteCycle(this.deleteCycle).subscribe(x => {
         this.configEcole.all().subscribe( data => this.cycles = data);
         this.notif.success('Opération effectuée avec succès', '', {timeOut: 6000});
       }, error1 => {
