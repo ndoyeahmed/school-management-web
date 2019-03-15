@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {AuthenticationService} from '../../auth/authentication.service';
+import {UtilisateurModel} from '../../modeles/utilisateur.model';
 
 @Component({
   selector: 'app-menu',
@@ -6,8 +8,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./menu.component.scss']
 })
 export class MenuComponent implements OnInit {
-
-  constructor() { }
+  userConnected = new UtilisateurModel();
+  constructor(private auth: AuthenticationService) { }
 
   ngOnInit() {
     // @ts-ignore
@@ -16,6 +18,7 @@ export class MenuComponent implements OnInit {
       const trees: any = $('[data-widget="tree"]');
       trees.tree();
     });
+    this.auth.identity().subscribe( data => this.userConnected = data, error1 => console.log(error1));
   }
 
 }

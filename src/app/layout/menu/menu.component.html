@@ -8,7 +8,7 @@
         <img src="../../../assets/img/my_img/online2.png" class="img-circle" alt="User Image">
       </div>
       <div class="pull-left info">
-        <p>Mouhamed NDOYE</p>
+        <p>{{userConnected.prenom + ' ' + userConnected.nom}}</p>
         <a href="#"><i class="fa fa-circle text-success"></i> En ligne</a>
       </div>
     </div>
@@ -49,6 +49,7 @@
         <ul class="treeview-menu">
           <li><a [routerLink]="'/pages/annee-scolaire'"><i class="fa fa-circle-o"></i>Année scolaire</a></li>
           <li><a [routerLink]="'/pages/cycle'"><i class="fa fa-circle-o"></i>Cycle</a></li>
+          <li><a [routerLink]="'/pages/user'"><i class="fa fa-circle-o"></i>Utilisateur</a></li>
         </ul>
       </li>
     </ul>

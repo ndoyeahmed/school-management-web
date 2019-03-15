@@ -9,7 +9,7 @@ import {
   MatDialog,
   MatDialogModule,
   MatFormFieldModule,
-  MatInputModule,
+  MatInputModule, MatSelectModule,
   MatSlideToggleModule
 } from '@angular/material';
 import {FormsModule} from '@angular/forms';
@@ -21,6 +21,9 @@ import {CycleComponent} from './configuration-ecole/cycle/cycle.component';
 import {NiveauComponent} from './configuration-ecole/niveau/niveau.component';
 import {NgxUiLoaderConfig, NgxUiLoaderModule, PB_DIRECTION, POSITION, SPINNER} from 'ngx-ui-loader';
 import {ConfigurationEcoleService} from './services/configuration-ecole.service';
+import { UserComponent } from './user/user.component';
+import {LocalisationService} from './services/localisation.service';
+import {NgxSelectModule} from 'ngx-select-ex';
 
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   bgsColor: 'red',
@@ -36,7 +39,7 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
 };
 
 @NgModule({
- declarations: [DashboardComponent, AnneeScolaireComponent, CycleComponent, NiveauComponent, ConfigurationEcoleComponent, ClassesComponent],
+ declarations: [DashboardComponent, AnneeScolaireComponent, CycleComponent, NiveauComponent, ConfigurationEcoleComponent, ClassesComponent, UserComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -47,12 +50,15 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     MatButtonModule,
     MatDialogModule,
     MatSlideToggleModule,
+    MatSelectModule,
+    NgxSelectModule,
     NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
   ],
   providers: [
     AnneeScolaireService,
     NotificationService,
     ConfigurationEcoleService,
+    LocalisationService,
   ]
 })
 export class PagesModule { }
