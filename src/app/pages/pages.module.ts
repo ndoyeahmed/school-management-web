@@ -5,7 +5,7 @@ import {PagesRoutingModule} from './pages-routing.module';
 import { AnneeScolaireComponent } from './annee-scolaire/annee-scolaire.component';
 import {
   MatButtonModule,
-  MatButtonToggleModule,
+  MatButtonToggleModule, MatCardModule,
   MatDialog,
   MatDialogModule,
   MatFormFieldModule,
@@ -24,6 +24,8 @@ import {ConfigurationEcoleService} from './services/configuration-ecole.service'
 import { UserComponent } from './user/user.component';
 import {LocalisationService} from './services/localisation.service';
 import {NgxSelectModule} from 'ngx-select-ex';
+import {CompteService} from './services/compte.service';
+import {EtablissementService} from './services/etablissement.service';
 
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   bgsColor: 'red',
@@ -51,6 +53,7 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     MatDialogModule,
     MatSlideToggleModule,
     MatSelectModule,
+    MatCardModule,
     NgxSelectModule,
     NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
   ],
@@ -59,6 +62,8 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     NotificationService,
     ConfigurationEcoleService,
     LocalisationService,
+    CompteService,
+    EtablissementService,
   ]
 })
 export class PagesModule { }

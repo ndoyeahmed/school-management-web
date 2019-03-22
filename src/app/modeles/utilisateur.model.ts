@@ -1,5 +1,6 @@
 import {CompteModel} from './compte.model';
 import {EtablissementModel} from './etablissement.model';
+import {ProfilUserModel} from './profil-user.model';
 
 export class UtilisateurModel {
   public id?: number;
@@ -12,4 +13,5 @@ export class UtilisateurModel {
   public isArchiver: boolean;
   public compte: CompteModel;
   public etablissement: EtablissementModel;
+  public profilUtilisateurs: ProfilUserModel[];
 }

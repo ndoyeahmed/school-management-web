@@ -1,13 +1,13 @@
-<section class="content-header">
+<mat-card>
   <h1>
     Année scolaire
     <!--<small>Control panel</small>-->
   </h1>
-  <ol class="breadcrumb">
+  <ol class="breadcrumb text-right">
     <li><a href="#"><i class="fa fa-dashboard"></i> Accueil</a></li>
     <li class="active">Année scolaire</li>
   </ol>
-</section>
+</mat-card>
 
 <section class="content">
   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -15,7 +15,7 @@
       <div class="box-header">
        <div class="row">
          <div class="col-md-2 col-lg-2 col-sm-2 col-xs-2">
-           <button class="btn btn-success" data-toggle="modal" data-target="#addModal"><i class="fa fa-plus"></i></button>
+           <button mat-fab color="primary" data-toggle="modal" data-target="#addModal"><i class="fa fa-plus"></i></button>
            <div class="modal fade" id="addModal">
              <ngx-ui-loader fgsType="pulse" [loaderId]="'add-annee'"></ngx-ui-loader>
              <div class="modal-dialog">
@@ -38,7 +38,7 @@
                            </mat-form-field>
                          </div>
                          <div class="form-group row">
-                           <button data-dismiss="modal" class="btn btn-primary pull-right" (click)="save()">Enregistrer</button>
+                           <button data-dismiss="modal" mat-raised-button color="primary" class="pull-right" (click)="save()">Enregistrer</button>
                          </div>
                        </form>
                      </div>
@@ -62,7 +62,7 @@
         <ngx-ui-loader fgsType="three-bounce" [loaderId]="'liste-annee'"></ngx-ui-loader>
         <h4 *ngIf="anneeScolaires.length<=0">Aucun résultat trouvé. Veuillez ajouter une nouvelle année scolaire SVP</h4>
         <table class="table table-striped" *ngIf="anneeScolaires.length > 0">
-          <thead>
+          <thead class="bg-primary text-white">
           <tr>
             <th>N°</th>
             <th>Année scolaire</th>
@@ -82,7 +82,7 @@
         'text-danger': annee.encours
         }">{{!annee.encours ? 'Activer' : 'Désactiver'}}</mat-label>
               </mat-slide-toggle> &nbsp;&nbsp;&nbsp;
-              <button class="btn btn-primary"  (click)="onUpdate(annee)" data-toggle="modal" data-target="#modifModal"><i class="fa fa-edit"></i>Modifier</button>
+              <button mat-raised-button color="primary" (click)="onUpdate(annee)" data-toggle="modal" data-target="#modifModal"><i class="fa fa-edit"></i>&nbsp;Modifier</button>
               <div class="modal fade" id="modifModal">
                 <div class="modal-dialog">
                   <div class="modal-content">
@@ -104,7 +104,7 @@
                               </mat-form-field>
                             </div>
                             <div class="form-group row">
-                              <button data-dismiss="modal" class="btn btn-primary pull-right" (click)="update()">Enregistrer</button>
+                              <button data-dismiss="modal" mat-raised-button color="primary" class="pull-right" (click)="update()">Enregistrer</button>
                             </div>
                           </form>
                         </div>
@@ -113,7 +113,7 @@
                   </div>
                 </div>
               </div>
-              &nbsp;&nbsp;&nbsp;<button class="btn btn-danger" (click)="onDelete(annee)"><i class="fa fa-remove"></i>Supprimer</button>
+              &nbsp;&nbsp;&nbsp;<button mat-raised-button color="warn" (click)="onDelete(annee)"><i class="fa fa-remove"></i>&nbsp;Supprimer</button>
             </td>
           </tr>
           </tbody>
