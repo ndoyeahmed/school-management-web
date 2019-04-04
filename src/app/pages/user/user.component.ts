@@ -31,12 +31,15 @@ listRegion = [] as RegionModel[];
 /* Object declaration */
   detailUser = new UtilisateurModel();
   user = new UtilisateurModel();
+  userUpdate = new UtilisateurModel();
   profil = new ProfilModel();
   ville = new VilleModel();
   region = new RegionModel();
   etablissement = new EtablissementModel();
   compte = new CompteModel();
+  compteUpdate = new CompteModel();
   isSuperAdmin = false;
+  page = 1;
   /* END Object declaration */
   constructor(
     private localisationService: LocalisationService,
@@ -185,7 +188,7 @@ listRegion = [] as RegionModel[];
   }
 
   onDesactive(usr) {
-    let u = usr as UtilisateurModel;
+    const u = usr as UtilisateurModel;
     if (confirm('Etes vous sûr de vouloir effectuer cette opération?')) {
       this.ngxService.startLoader('list-user');
       u.etat = false;
@@ -222,7 +225,7 @@ listRegion = [] as RegionModel[];
   }
 
   onActive(usr) {
-    let u = usr as UtilisateurModel;
+    const u = usr as UtilisateurModel;
     if (confirm('Etes vous sûr de vouloir effectuer cette opération?')) {
       this.ngxService.startLoader('list-user');
       u.etat = true;
@@ -280,6 +283,50 @@ listRegion = [] as RegionModel[];
         this.ngxService.stopLoader('list-user');
       });
     }
+  }
+
+  onUpdate(usr) {
+    this.ngxService.startLoader('edit-user');
+    this.userUpdate = usr as UtilisateurModel;
+    this.compteUpdate = usr.compte;
+    this.profil = this.userUpdate.profilUtilisateurs[0].profil;
+    this.compteService.allProfil().subscribe( data => {
+      this.listProfil = data;
+      this.ngxService.stopLoader('edit-user');
+    }, error1 => {
+      console.log(error1);
+      this.ngxService.stopLoader('edit-user');
+    });
+  }
+
+  onCancel() {}
+
+  update() {
+    this.ngxService.startLoader('edit-user');
+    const values = {
+      email: this.compteUpdate.email,
+      profil: this.profil.nom,
+    };
+    this.compteService.changeUserProfil(values).subscribe(
+      x => {
+        console.log(x);
+        this.ngxService.startLoader('edit-user');
+        this.compteService.listUser().subscribe(u => {
+          this.listUser = u;
+          this.ngxService.stopLoader('edit-user');
+        }, error1 => {
+          console.log(error1);
+          this.ngxService.stopLoader('edit-user');
+        });
+        this.ngxService.stopLoader('edit-user');
+        this.notif.success('Opération effectuée avec succès', '', {timeOut: 6000});
+      },
+      error1 => {
+        console.log(error1);
+        this.ngxService.stopLoader('edit-user');
+        this.notif.error('Echec de l\'opération', '', {timeOut: 6000});
+      }
+    );
   }
 
 }

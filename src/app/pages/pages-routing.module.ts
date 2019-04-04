@@ -5,12 +5,14 @@ import {AuthGuard} from '../auth/auth-guard.service';
 import {AnneeScolaireComponent} from './annee-scolaire/annee-scolaire.component';
 import {CycleComponent} from './configuration-ecole/cycle/cycle.component';
 import {UserComponent} from './user/user.component';
+import {InscriptionComponent} from './inscription/inscription.component';
 
 const routes: Routes = [
   {path: '', canActivate: [AuthGuard], component: DashboardComponent },
   {path: 'annee-scolaire', canActivate: [AuthGuard], component: AnneeScolaireComponent},
   {path: 'cycle', canActivate: [AuthGuard], component: CycleComponent},
-  {path: 'user', canActivate: [AuthGuard], component: UserComponent}
+  {path: 'user', canActivate: [AuthGuard], component: UserComponent},
+  {path: 'inscription', canActivate: [AuthGuard], component: InscriptionComponent}
 ];
 
 @NgModule({

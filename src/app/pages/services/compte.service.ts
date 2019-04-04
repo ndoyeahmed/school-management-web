@@ -25,6 +25,10 @@ export class CompteService {
     return this.http.post<any>(this.api + '/change-status-user', data);
   }
 
+  changeUserProfil(data: any): Observable<any> {
+    return this.http.post<any>(this.api + '/change-user-profile', data);
+  }
+
   archiverUser(data: any): Observable<any> {
     return this.http.post<any>(this.api + '/archiver-user', data);
   }

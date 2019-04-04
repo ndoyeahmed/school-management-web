@@ -5,11 +5,11 @@ import {PagesRoutingModule} from './pages-routing.module';
 import { AnneeScolaireComponent } from './annee-scolaire/annee-scolaire.component';
 import {
   MatButtonModule,
-  MatButtonToggleModule, MatCardModule,
+  MatButtonToggleModule, MatCardModule, MatCheckboxModule, MatDatepickerModule,
   MatDialog,
-  MatDialogModule,
+  MatDialogModule, MatExpansionModule,
   MatFormFieldModule,
-  MatInputModule, MatSelectModule,
+  MatInputModule, MatNativeDateModule, MatRadioModule, MatSelectModule,
   MatSlideToggleModule
 } from '@angular/material';
 import {FormsModule} from '@angular/forms';
@@ -26,6 +26,8 @@ import {LocalisationService} from './services/localisation.service';
 import {NgxSelectModule} from 'ngx-select-ex';
 import {CompteService} from './services/compte.service';
 import {EtablissementService} from './services/etablissement.service';
+import {NgxPaginationModule} from 'ngx-pagination';
+import { InscriptionComponent } from './inscription/inscription.component';
 
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   bgsColor: 'red',
@@ -41,10 +43,19 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
 };
 
 @NgModule({
- declarations: [DashboardComponent, AnneeScolaireComponent, CycleComponent, NiveauComponent, ConfigurationEcoleComponent, ClassesComponent, UserComponent],
+ declarations: [
+   DashboardComponent,
+   AnneeScolaireComponent,
+   CycleComponent,
+   NiveauComponent,
+   ConfigurationEcoleComponent,
+   ClassesComponent,
+   UserComponent,
+   InscriptionComponent],
   imports: [
     CommonModule,
     FormsModule,
+    NgxPaginationModule,
     PagesRoutingModule,
     MatFormFieldModule,
     MatInputModule,
@@ -54,8 +65,13 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     MatSlideToggleModule,
     MatSelectModule,
     MatCardModule,
+    MatRadioModule,
     NgxSelectModule,
     NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatExpansionModule,
+    MatCheckboxModule,
   ],
   providers: [
     AnneeScolaireService,
