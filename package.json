@@ -33,6 +33,8 @@
     "jquery-slimscroll": "^1.3.8",
     "material-design-icons": "^3.0.1",
     "ngx-cookie-service": "^2.1.0",
+    "ngx-pagination": "^3.2.1",
+    "ngx-select-ex": "^3.6.8",
     "ngx-toastr": "^9.1.2",
     "ngx-ui-loader": "^7.2.1",
     "rxjs": "~6.3.3",

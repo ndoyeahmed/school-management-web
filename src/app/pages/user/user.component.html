@@ -1,0 +1,257 @@
+<!--<section class="content-header">-->
+  <mat-card>
+    <h1>
+      Gestion utilisateurs
+      <!--<small>Control panel</small>-->
+    </h1>
+    <ol class="breadcrumb text-right">
+      <li><a href="#"><i class="fa fa-dashboard"></i> Accueil</a></li>
+      <li class="active">Utilisateurs</li>
+    </ol>
+  </mat-card>
+<!--</section>-->
+
+<section class="content">
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="box box-primary col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <div class="box-header">
+        <div class="row">
+          <div class="col-md-2 col-lg-2 col-sm-2 col-xs-2">
+            <button (click)="onAdd()" mat-fab color="primary" data-toggle="modal" data-target="#addModal"><i class="fa fa-plus"></i></button>
+            <div class="modal fade" id="addModal" role="dialog" aria-hidden="true" aria-labelledby="addModal" tabindex="-1" style="display: none">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <ngx-ui-loader fgsType="pulse" [loaderId]="'add-user'"></ngx-ui-loader>
+                  <!-- Modal Header -->
+                  <div class="modal-header">
+                    <h4 class="modal-title text-center">Ajouter un utilisateur</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  </div>
+                  <!-- Modal body -->
+                  <div class="modal-body add-form">
+                    <div class="row">
+                      <div class="form-group">
+                        <form class="form-group" (submit)="save()">
+                          <div class="form-group row">
+                            <mat-form-field class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                            <mat-label>Nom : </mat-label>
+                            <input name="nom" matInput required [(ngModel)]="user.nom" />
+                          </mat-form-field>
+                            <mat-form-field class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                              <mat-label>Prénom : </mat-label>
+                              <input name="prenom" required matInput [(ngModel)]="user.prenom"/>
+                            </mat-form-field>
+                          </div>
+
+                          <div class="form-group row">
+                            <mat-form-field class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                              <mat-label>Téléphone : </mat-label>
+                              <input type="tel" required name="telephone" matInput [(ngModel)]="user.telephone"/>
+                            </mat-form-field>
+                            <mat-form-field class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                              <mat-label>Email : </mat-label>
+                              <input type="email" required name="email" matInput [(ngModel)]="compte.email" />
+                            </mat-form-field>
+                          </div>
+
+                          <div class="form-group row">
+                            <mat-form-field class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                              <mat-label>Adresse : </mat-label>
+                              <input type="text" required name="telephone" matInput [(ngModel)]="user.adresse"/>
+                            </mat-form-field>
+                          </div>
+
+                          <div class="form-group row">
+                           <label for="profil">Profils : </label>
+                            <ngx-select required="true" id="profil" [items]="listProfil" optionValueField="id" optionTextField="nom" (selectionChanges)="onSelectedProfil($event)"></ngx-select>
+                          </div>
+                          <div class="form-group row" *ngIf="!isSuperAdmin">
+                            <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                              <label for="region">Régions : </label>
+                              <ngx-select id="region" [items]="listRegion" optionValueField="id" optionTextField="region" (selectionChanges)="onSelectedRegion($event)"></ngx-select>
+                            </div>
+                            <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                              <label for="ville">Villes : </label>
+                              <ngx-select id="ville" [items]="listVille" optionValueField="id" optionTextField="ville" (selectionChanges)="onSelectedVille($event)"></ngx-select>
+                            </div>
+                          </div>
+                          <div class="form-group row" *ngIf="!isSuperAdmin">
+                            <label for="etablissement">Etablissements : </label>
+                            <ngx-select id="etablissement" [items]="listEtablissement" optionValueField="id" optionTextField="libelle" (selectionChanges)="onSelectedEtablissement($event)"></ngx-select>
+                          </div>
+                          <div class="form-group row">
+                            <button type="submit" mat-raised-button color="primary" class="pull-right">Enregistrer</button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 col-lg-4 col-sm-2 col-xs-2 col-md-offset-6 col-lg-offset-6 col-sm-offset-3 col-xs-offset-2">
+            <mat-form-field>
+              <mat-label>Rechercher</mat-label>
+              <input matInput type="text" name="recherche" (keyup)="search($event.target.value)" />
+              <span class="form-control-feedback"><i class="fa fa-search"></i></span>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <div class="box-body">
+        <ngx-ui-loader fgsType="pulse" [loaderId]="'list-user'"></ngx-ui-loader>
+        <h4 *ngIf="listUser.length<=0">Aucun résultat trouvé. Veuillez ajouter une nouvelle année scolaire SVP</h4>
+        <div style="overflow-x:auto;" class="row col-md-12 col-lg-12">
+          <table class="table table-striped table-responsive" *ngIf="listUser.length > 0">
+            <thead class="bg-primary text-white">
+            <tr>
+              <th>N°</th>
+              <th>Date de création</th>
+              <th>Prénom & Nom</th>
+              <th>Téléphone</th>
+              <th>Etablissement</th>
+              <th>Profil</th>
+              <th>Détails</th>
+              <th>Statut</th>
+              <th class="text-center">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let usr of (listUserFilter != null ? listUserFilter : listUser) | paginate: { itemsPerPage: 15, currentPage: page }">
+              <td>{{(listUser.indexOf(usr) + 1)}}</td>
+              <td>{{usr.date ? (usr.date | date : 'dd/MM/yyyy, HH:mm') : ''}}</td>
+              <td>{{(usr.prenom ? usr.prenom : '') + ' ' + (usr.nom ? usr.nom : '')}}</td>
+              <td>{{usr.telephone ? usr.telephone : ''}}</td>
+              <td>{{usr.etablissement ? usr.etablissement.libelle ? usr.etablissement.libelle : '' : ''}}</td>
+              <td>{{usr.profilUtilisateurs ? usr.profilUtilisateurs.length > 0 ? usr.profilUtilisateurs[0] ? usr.profilUtilisateurs[0].profil ?
+                usr.profilUtilisateurs[0].profil.nom ? usr.profilUtilisateurs[0].profil.nom : '' : '' : '' : '' : ''}}</td>
+              <td>
+                <button (click)="onClickDetail(usr)" mat-mini-fab color="primary" data-toggle="modal" data-target="#detailModal"><i class="fa fa-list"></i></button>
+              </td>
+              <td [ngClass]="{'text-success text-bold': usr.etat,'text-danger text-bold': !usr.etat}">
+                <b>{{usr.etat ? 'Activer' : 'Désactiver'}}</b>
+              </td>
+              <td>
+                <div class="row">
+                  <div class="col-md-3 col-lg-3 col-sm-4 col-xs-4">
+                    <mat-slide-toggle color="primary" [ngModel]="usr.etat" (ngModelChange)="!usr.etat ? onActive(usr) : onDesactive(usr)">
+                      <!--<mat-label [ngClass]="{-->
+        <!--'text-success text-bold': !usr.etat,-->
+        <!--'text-danger text-bold': usr.etat-->
+        <!--}">{{!usr.etat ? 'Activer' : 'Désactiver'}}</mat-label>-->
+                    </mat-slide-toggle>
+                  </div>
+                  <div class="col-md-3 col-lg-3 col-sm-4 col-xs-4">
+                    <button (click)="onUpdate(usr)" mat-mini-fab color="primary" data-toggle="modal" data-target="#editModal"><i class="fa fa-edit"></i></button>
+                  </div>
+                  <div class="col-md-4 col-lg-4 col-sm-4 col-xs-4">
+                    <button (click)="onDelete(usr)" mat-mini-fab color="warn"><i class="fa fa-remove"></i></button>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="modal fade" id="editModal">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <ngx-ui-loader fgsType="pulse" [loaderId]="'edit-user'"></ngx-ui-loader>
+              <!-- Modal Header -->
+              <div class="modal-header">
+                <h4 class="modal-title text-center">Changer le profil</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+              </div>
+              <!-- Modal body -->
+              <div class="modal-body add-form">
+                <div class="row">
+                  <div class="form-group">
+                    <form class="form-group" (submit)="update()">
+                      <div class="form-group row">
+                        <mat-form-field class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                          <mat-label>Nom : </mat-label>
+                          <input name="nom" matInput disabled [(ngModel)]="userUpdate.nom" />
+                        </mat-form-field>
+                        <mat-form-field class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                          <mat-label>Prénom : </mat-label>
+                          <input name="prenom" disabled matInput [(ngModel)]="userUpdate.prenom"/>
+                        </mat-form-field>
+                      </div>
+
+                      <div class="form-group row">
+                        <mat-form-field class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                          <mat-label>Téléphone : </mat-label>
+                          <input type="tel" disabled name="telephone" matInput [(ngModel)]="userUpdate.telephone"/>
+                        </mat-form-field>
+                        <mat-form-field class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                          <mat-label>Email : </mat-label>
+                          <input type="email" disabled name="email" matInput [(ngModel)]="compteUpdate.email" />
+                        </mat-form-field>
+                      </div>
+
+                      <div class="form-group row">
+                        <mat-form-field class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                          <mat-label>Adresse : </mat-label>
+                          <input type="text" disabled name="telephone" matInput [(ngModel)]="userUpdate.adresse"/>
+                        </mat-form-field>
+                      </div>
+
+                      <div class="form-group row">
+                        <label for="profilUpdate">Profils : </label>
+                        <ngx-select required="true" id="profilUpdate" [items]="listProfil" optionValueField="id" optionTextField="nom" (selectionChanges)="onSelectedProfil($event)"></ngx-select>
+                      </div>
+                      <div class="form-group row">
+                        <button type="submit" mat-raised-button color="primary" class="pull-right">Modifier</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal fade" id="detailModal">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <!-- Modal Header -->
+              <div class="modal-header">
+                <h4 class="modal-title text-center">Autres informations</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+              </div>
+              <!-- Modal body -->
+              <div class="modal-body">
+                <table class="table table-striped">
+                  <thead class="bg-primary text-white">
+                  <tr>
+                    <th>E-mail</th>
+                    <th>Région</th>
+                    <th>Ville</th>
+                    <th>Adresse</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <td>{{detailUser.compte ? detailUser.compte.email ? detailUser.compte.email : '' : ''}}</td>
+                    <td>{{detailUser.etablissement ? detailUser.etablissement.ville ? detailUser.etablissement.ville.region ?
+                      detailUser.etablissement.ville.region.region ? detailUser.etablissement.ville.region.region : '' : '' : '' : ''}}</td>
+                    <td>{{detailUser.etablissement ? detailUser.etablissement.ville ? detailUser.etablissement.ville.ville ? detailUser.etablissement.ville.ville : '' : '' : ''}}</td>
+                    <td>{{detailUser.adresse ? detailUser.adresse : ''}}</td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="box-footer text-center">
+        <pagination-controls *ngIf='(listUser && listUser.length > 15) || (listUserFilter && listUserFilter > 15)' (pageChange)="page = $event"></pagination-controls>
+      </div>
+    </div>
+  </div>
+</section>

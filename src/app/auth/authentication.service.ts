@@ -14,7 +14,7 @@ export class AuthenticationService {
     this.cookie.set('mdd_token', token);
     this.identity().subscribe(user => {
       this.cookie.set('user_data', JSON.stringify(user));
-      if (this.hasAnyAuthority(['Super Administrateur'], user)) {
+      if (this.hasAnyAuthority(['Super Administrateur', 'Administrateur'], user)) {
         this.router.navigate(['']);
       } else {
         this.router.navigate(['/pages/map']);
