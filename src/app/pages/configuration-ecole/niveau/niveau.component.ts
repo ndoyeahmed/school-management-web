@@ -16,34 +16,34 @@ import {Cycle} from 'src/app/modeles/cycle.model';
 export class NiveauComponent implements OnInit {
 
 
-  niveau = [] as Niveau[];
-  niveauFilter = [] as Niveau[];
-  Niveau= new Niveau();
-  cycle =new Cycle(); 
+  listNiveau = [] as Niveau[];
+  listNiveauFilter = [] as Niveau[];
+  niveau = new Niveau();
+  cycle = new Cycle();
 
   updateNiveau = new Niveau();
   deleteNiveau = new Niveau();
 
   constructor( private notif: NotificationService,
     private configEcole: ConfigurationEcoleService,
-    private ngxService: NgxUiLoaderService){}
+    private ngxService: NgxUiLoaderService) {}
 
   ngOnInit() {
     this.ngxService.startLoader('niveau');
     this.configEcole.allNiveau().subscribe( data => {
-      this.niveau = data;
+      this.listNiveau = data;
     }, error1 => {
       console.log(error1);
     });
     this.ngxService.stopLoader('niveau');
-    this.niveauFilter = null;
+    this.listNiveauFilter = null;
   }
 
   save() {
     this.ngxService.startLoader('niveau');
-    this.Niveau.archiver = false;
-    this.configEcole.saveNiveau(this.Niveau).subscribe( x => {
-      this.configEcole.allNiveau().subscribe( data => this.niveau=data);
+    this.niveau.archiver = false;
+    this.configEcole.saveNiveau(this.niveau).subscribe( x => {
+      this.configEcole.allNiveau().subscribe( data => this.listNiveau = data);
       this.notif.success('Opération effectuée avec succès', '', {timeOut: 6000});
     }, error1 => {
       console.log(error1);
@@ -59,7 +59,7 @@ export class NiveauComponent implements OnInit {
     this.ngxService.startLoader('niveau');
     this.configEcole.saveNiveau(this.updateNiveau).subscribe( x => {
       console.log(x);
-      this.configEcole.allNiveau().subscribe( data => this.niveau = data);
+      this.configEcole.allNiveau().subscribe( data => this.listNiveau = data);
       this.notif.success('Opération effectuée avec succès', '', {timeOut: 6000});
     }, error1 => {
       this.notif.error('Echec de l\'opération', '', {timeOut: 6000});
@@ -73,9 +73,9 @@ export class NiveauComponent implements OnInit {
       this.ngxService.startLoader('niveau');
       this.deleteNiveau.archiver = true;
       this.configEcole.deleteNiveau(this.deleteNiveau).subscribe(x => {
-        this.configEcole.allNiveau().subscribe( data => this.niveau = data);
+        this.configEcole.allNiveau().subscribe( data => this.listNiveau = data);
         this.notif.success('Opération effectuée avec succès', '', {timeOut: 6000});
-      }, error1 =>{
+      }, error1 => {
         this.notif.error('Echec de l\'opération', '', {timeOut: 6000});
       });
       this.ngxService.stopLoader('niveau');
@@ -84,9 +84,9 @@ export class NiveauComponent implements OnInit {
 
   search(term: string) {
     if (!term) {
-      this.niveauFilter = null;
+      this.listNiveauFilter = null;
     } else {
-      this.niveauFilter = this.niveau.filter(x =>
+      this.listNiveauFilter = this.listNiveau.filter(x =>
         (x.libelle ? x.libelle : '').toLowerCase().includes(term.toLowerCase()));
     }
   }

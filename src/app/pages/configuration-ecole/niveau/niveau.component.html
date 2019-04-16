@@ -35,21 +35,21 @@
                           <div class="form-group row">
                             <mat-form-field class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                               <mat-label>Niveau : </mat-label>
-                              <input name="Niveau" matInput [(ngModel)]="Niveau.libelle" />
+                              <input name="Niveau" matInput [(ngModel)]="niveau.libelle" />
                             </mat-form-field>
                           </div>
 
                           <div class="form-group row">
                             <mat-form-field class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                               <mat-label>Montant Inscription : </mat-label>
-                              <input name="Montant" matInput [(ngModel)]="Niveau.montant_inscription" />
+                              <input name="Montant" matInput [(ngModel)]="niveau.montantInscription" />
                             </mat-form-field>
                           </div>
 
                           <div class="form-group row">
                             <mat-form-field class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                               <mat-label>Montant Mensuel : </mat-label>
-                              <input name="Mensuel" matInput [(ngModel)]="Niveau.montant_mensuel" />
+                              <input name="Mensuel" matInput [(ngModel)]="niveau.montantMensuel" />
                             </mat-form-field>
                           </div>
 
@@ -83,8 +83,8 @@
       </div>
       <div class="box-body" style="position: relative">
         <ngx-ui-loader fgsType="three-bounce" [loaderId]="'niveau'"></ngx-ui-loader>
-        <h4 *ngIf="niveau.length<=0"> Aucun résultat trouvé. Veuillez ajouter un nouveau Niveau SVP</h4>
-        <table class="table table-striped" *ngIf="niveau.length>0">
+        <h4 *ngIf="listNiveau.length<=0"> Aucun résultat trouvé. Veuillez ajouter un nouveau Niveau SVP</h4>
+        <table class="table table-striped" *ngIf="listNiveau.length>0">
           <thead class="bg-primary text-white">
           <tr>
               <th>N°</th>
@@ -96,14 +96,14 @@
           </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let Niveau of (niveauFilter != null && niveauFilter.length>0 ? niveauFilter : niveau)">
-            <td>{{ (niveauFilter != null && niveauFilter.length > 0 ? niveauFilter.indexOf(Niveau) + 1 : niveau.indexOf(Niveau) + 1)}}</td>
-            <td>{{Niveau.libelle}}</td>
+          <tr *ngFor="let n of (listNiveauFilter != null && listNiveauFilter.length>0 ? listNiveauFilter : listNiveau)">
+            <td>{{ (listNiveauFilter != null && listNiveauFilter.length > 0 ? listNiveauFilter.indexOf(n) + 1 : listNiveau.indexOf(n) + 1)}}</td>
+            <td>{{n.libelle}}</td>
             <td>{{cycle.libelle}}</td>
-            <td>{{Niveau.montant_inscription}}</td>
-            <td>{{Niveau.montant_mensuel}}</td>
+            <td>{{n.montantInscription}}</td>
+            <td>{{n.montantMensuel}}</td>
             <td class="text-center">
-              <button mat-raised-button color="primary"  (click)="onUpdate(Niveau)" data-toggle="modal" data-target="#modifModal"><i class="fa fa-edit"></i>&nbsp;Modifier</button>
+              <button mat-raised-button color="primary"  (click)="onUpdate(n)" data-toggle="modal" data-target="#modifModal"><i class="fa fa-edit"></i>&nbsp;Modifier</button>
               <div class="modal fade" id="modifModal">
                 <div class="modal-dialog">
                   <div class="modal-content">
@@ -127,14 +127,14 @@
                             <div class="form-group row">
                               <mat-form-field class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <mat-label>Montant Inscription : </mat-label>
-                                <input name="Montant" matInput [(ngModel)]="updateNiveau.montant_inscription" />
+                                <input name="Montant" matInput [(ngModel)]="updateNiveau.montantInscription" />
                               </mat-form-field>
                             </div>
 
                             <div class="form-group row">
                               <mat-form-field class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <mat-label>Montant Mensuel : </mat-label>
-                                <input name="Mensuel" matInput [(ngModel)]="updateNiveau.montant_mensuel" />
+                                <input name="Mensuel" matInput [(ngModel)]="updateNiveau.montantMensuel" />
                               </mat-form-field>
                             </div>
 
@@ -155,7 +155,7 @@
                   </div>
                 </div>
               </div>
-              &nbsp;&nbsp;&nbsp;<button mat-raised-button color="warn"  (click)="onDelete(Niveau)"><i class="fa fa-remove"></i>&nbsp;Supprimer</button>
+              &nbsp;&nbsp;&nbsp;<button mat-raised-button color="warn"  (click)="onDelete(n)"><i class="fa fa-remove"></i>&nbsp;Supprimer</button>
             </td>
           </tr>
           </tbody>
