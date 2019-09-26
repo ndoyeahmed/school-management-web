@@ -12,6 +12,10 @@ export class AnneeScolaireService {
     return this.http.post(this.api + '/add-annee-scolaire', data);
   }
 
+  upload(data: any): Observable<any> {
+    return this.http.post(this.api + '/upload', data);
+  }
+
   all(): Observable<AnneeScolaire[]> {
     return this.http.get<AnneeScolaire[]>(this.api + '/list-anne-scolaire');
   }

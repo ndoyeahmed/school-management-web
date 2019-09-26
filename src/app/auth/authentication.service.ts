@@ -17,7 +17,7 @@ export class AuthenticationService {
       if (this.hasAnyAuthority(['Super Administrateur', 'Administrateur'], user)) {
         this.router.navigate(['']);
       } else {
-        this.router.navigate(['/pages/map']);
+        this.router.navigate(['/pages/inscription']);
       }
     });
   }

@@ -250,7 +250,7 @@
 
       </div>
       <div class="box-footer text-center">
-        <pagination-controls *ngIf='(listUser && listUser.length > 15) || (listUserFilter && listUserFilter > 15)' (pageChange)="page = $event"></pagination-controls>
+        <pagination-controls *ngIf='(listUser && listUser.length > 15) || (listUserFilter && listUserFilter.length > 15)' (pageChange)="page = $event"></pagination-controls>
       </div>
     </div>
   </div>

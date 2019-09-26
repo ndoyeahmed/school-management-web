@@ -299,8 +299,6 @@ listRegion = [] as RegionModel[];
     });
   }
 
-  onCancel() {}
-
   update() {
     this.ngxService.startLoader('edit-user');
     const values = {

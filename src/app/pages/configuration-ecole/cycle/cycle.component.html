@@ -15,15 +15,15 @@
       <div class="box-header">
         <div class="row">
           <div class="col-md-2 col-lg-2 col-sm-2 col-xs-2">
-            <button mat-fab color="primary" data-toggle="modal" data-target="#addModal"><i class="fa fa-plus"></i></button>
+            <button mat-fab color="primary" matTooltip="Ajouter cycle" data-toggle="modal" data-target="#addModal"><em class="fa fa-plus"></em></button>
             <div class="modal fade" id="addModal">
               <ngx-ui-loader fgsType="pulse" [loaderId]="'add-annee'"></ngx-ui-loader>
-              <div class="modal-dialog">
+              <div class="modal-dialog modal-sm">
                 <div class="modal-content">
 
                   <!-- Modal Header -->
                   <div class="modal-header">
-                    <h4 class="modal-title text-center">Ajouter un nouveau cycle</h4>
+                    <h4 class="modal-title text-center">Nouveau cycle</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                   </div>
                   <!-- Modal body -->
@@ -38,7 +38,9 @@
                             </mat-form-field>
                           </div>
                           <div class="form-group row">
-                            <button data-dismiss="modal" mat-raised-button color="primary" class="pull-right" (click)="save()">Enregistrer</button>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                              <button data-dismiss="modal" mat-raised-button color="primary" class="pull-right" (click)="save()">Enregistrer</button>
+                            </div>
                           </div>
                         </form>
                       </div>
@@ -61,6 +63,7 @@
       <div class="box-body" style="position: relative">
         <ngx-ui-loader fgsType="three-bounce" [loaderId]="'cycle'"></ngx-ui-loader>
         <h4 *ngIf="cycles.length<=0">Aucun résultat trouvé. Veuillez ajouter un nouveau cycle SVP</h4>
+        <h4 *ngIf="cyclesFilter && cyclesFilter.length === 0">Aucun résultat trouvé</h4>
         <table class="table table-striped" *ngIf="cycles.length > 0">
           <thead class="bg-primary text-white">
           <tr>

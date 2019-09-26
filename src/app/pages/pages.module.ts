@@ -10,7 +10,7 @@ import {
   MatDialogModule, MatExpansionModule,
   MatFormFieldModule,
   MatInputModule, MatNativeDateModule, MatRadioModule, MatSelectModule,
-  MatSlideToggleModule
+  MatSlideToggleModule, MatTooltipModule
 } from '@angular/material';
 import {FormsModule} from '@angular/forms';
 import {AnneeScolaireService} from './services/annee-scolaire.service';
@@ -28,6 +28,8 @@ import {CompteService} from './services/compte.service';
 import {EtablissementService} from './services/etablissement.service';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { InscriptionComponent } from './inscription/inscription.component';
+import {MatFileUpload, MatFileUploadModule} from 'angular-material-fileupload';
+import {PaiementService} from './services/paiement.service';
 
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   bgsColor: 'red',
@@ -72,6 +74,7 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     MatNativeDateModule,
     MatExpansionModule,
     MatCheckboxModule,
+    MatTooltipModule,
   ],
   providers: [
     AnneeScolaireService,
@@ -80,6 +83,7 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     LocalisationService,
     CompteService,
     EtablissementService,
+    PaiementService,
   ]
 })
 export class PagesModule { }

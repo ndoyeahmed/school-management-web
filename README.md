@@ -1,7 +1,5 @@
 # SchoolManagementWeb
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/8ce4a854029e4c52b64e08b6628d0234)](https://app.codacy.com/app/ndoyeahmed/school-management-web?utm_source=github.com&utm_medium=referral&utm_content=ndoyeahmed/school-management-web&utm_campaign=Badge_Grade_Dashboard)
-
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.2.3.
 
 ## Development server

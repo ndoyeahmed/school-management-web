@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --proxy-config proxy.conf.json --port 4300 --open",
+    "start": "ng serve --proxy-config proxy.conf.json --port 4300 --open --aot",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -24,6 +24,7 @@
     "@angular/router": "~7.2.0",
     "@angular/service-worker": "~7.2.0",
     "@types/jquery": "^3.3.29",
+    "angular-material-fileupload": "^2.0.0",
     "bootstrap": "^3.4.1",
     "core-js": "^2.5.4",
     "font-awesome": "^4.7.0",

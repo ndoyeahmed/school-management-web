@@ -37,7 +37,8 @@ export class CycleComponent implements OnInit {
     this.configEcole.saveCycle(this.cycle).subscribe( x => {
       this.configEcole.all().subscribe( data => this.cycles = data);
       this.notif.success('Opération effectuée avec succès', '', {timeOut: 6000});
-    }, error1 => {
+      this.cycle = new Cycle();
+      }, error1 => {
       console.log(error1);
       this.notif.error('Echec de l\'opération', '', {timeOut: 6000});
     });
